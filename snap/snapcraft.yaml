@@ -1,11 +1,13 @@
 name: symfony
 base: core20
-version: git
+version: "0.1.0"
 summary: The Symfony CLI tool
 description: |
   The Symfony binary to develop Symfony applications.
 grade: devel
 confinement: strict
+contact: contact@jeremyfaton.me
+website: https://www.jeremyfaton.me
 
 architectures:
   - build-on: s390x
@@ -19,7 +21,7 @@ parts:
   symfony:
     plugin: go
     source-type: git
-    source: https://github.com/jeremy-faton/symfony-cli
+    source: https://github.com/symfony-cli/symfony-cli
 
 apps:
   symfony:
