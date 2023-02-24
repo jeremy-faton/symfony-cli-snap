@@ -1,0 +1,26 @@
+name: symfony
+base: core20
+version: git
+summary: The Symfony CLI tool
+description: |
+  The Symfony binary to develop Symfony applications.
+grade: devel
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+architectures:
+  - build-on: s390x
+  - build-on: ppc64el
+  - build-on: arm64
+  - build-on: armhf
+  - build-on: amd64
+  - build-on: i386
+
+parts:
+  symfony:
+    plugin: go
+    source-type: git
+    source: https://github.com/jeremy-faton/symfony-cli
+
+apps:
+  symfony:
+    command: bin/symfony-cli
