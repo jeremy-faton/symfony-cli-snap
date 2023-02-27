@@ -2,8 +2,10 @@ name: Check for new version
 
 on:
   push:
+    branches:
+      - feat/workflow
   schedule:
-    - cron '0 12 * * 1'
+    - cron: "0 12 * * 1"
 
 jobs:
   check:
