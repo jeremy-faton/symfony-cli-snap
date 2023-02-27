@@ -16,7 +16,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          TAGS = gh api repos/symfony-cli/symfony-cli/tags
+          TAGS=$(cat << EOF
+          first line
+          second line
+          third line
+          EOF
+          )
           echo "TAGS<<EOF" >> $GITHUB_ENV
           echo "$TAGS" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
