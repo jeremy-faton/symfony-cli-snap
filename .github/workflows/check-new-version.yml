@@ -35,7 +35,7 @@ jobs:
         run: |
           sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
           sudo chmod +x /usr/bin/yq
-          yq -i '.version = ${{ steps.getLatestTag.outputs.tag }}' snap/snapcraft.yaml
+          yq -i '.version = "${{ steps.getLatestTag.outputs.tag }}"' snap/snapcraft.yaml
           git status
 
       - name: Create Pull Request
