@@ -20,19 +20,22 @@ jobs:
           sudo chmod +x /usr/bin/yq
           gh api repos/symfony-cli/symfony-cli/tags | yq '.[0].name' | grep -o '[0-9].*' | xargs -I % sh -c 'echo {tag}={%}' > $GITHUB_OUTPUT
 
+      - name: Checkout repository
+        uses: action/checkout@v3
+
       - name: Get current tag
         id: getCurrentTag
         run: |
           sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
           sudo chmod +x /usr/bin/yq
-          ls -al
+          yq '.version' snap/snapcraft.yml | xargs -I % sh -c 'echo {tag}={%}' > $GITHUB_OUTPUT
 
       - name: Update version
-        if: ${{ steps.getCurrentTag.outputs.result != steps.getLatestTag.outputs.result }}
+        if: ${{ steps.getCurrentTag.outputs.tag != steps.getLatestTag.outputs.tag }}
         run: |
           sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
           sudo chmod +x /usr/bin/yq
-          yq -i '.version = ${{ steps.getLatestTag.outputs.result }}' snap/snapcraft.yml
+          yq -i '.version = ${{ steps.getLatestTag.outputs.tag }}' snap/snapcraft.yml
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
