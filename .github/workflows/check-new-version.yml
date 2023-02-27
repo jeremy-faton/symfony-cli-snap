@@ -25,7 +25,7 @@ jobs:
         id: getLatestTag
         uses: mikefarah/yq@master
         with:
-          cmd: echo ${{ env.TAGS }} | yq '.[0].name' | grep -o '[0-9].*'
+          cmd: echo ${{ env.TAGS }} | yq -p=json -o=json '.[0].name' | grep -o '[0-9].*'
 
       - name: Get current tag
         id: getCurrentTag
