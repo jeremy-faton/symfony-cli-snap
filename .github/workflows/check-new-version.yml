@@ -16,22 +16,22 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
-          chmod +x /usr/bin/yq
-          gh api repos/symfony-cli/symfony-cli/tags | yq -p=json -o=json '.[0].name' | grep -o '[0-9].* > $GITHUB_OUTPUT
+          sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
+          sudo chmod +x /usr/bin/yq
+          gh api repos/symfony-cli/symfony-cli/tags | yq '.[0].name' | grep -o '[0-9].* > $GITHUB_OUTPUT
 
       - name: Get current tag
         id: getCurrentTag
         run: |
-          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
-          chmod +x /usr/bin/yq
+          sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
+          sudo chmod +x /usr/bin/yq
           yq '.version' snap/snapcraft.yml
 
       - name: Update version
         if: ${{ steps.getCurrentTag.outputs.result != steps.getLatestTag.outputs.result }}
         run: |
-          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
-          chmod +x /usr/bin/yq
+          sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
+          sudo chmod +x /usr/bin/yq
           yq -i '.version = ${{ steps.getLatestTag.outputs.result }}' snap/snapcraft.yml
 
       - name: Create Pull Request
