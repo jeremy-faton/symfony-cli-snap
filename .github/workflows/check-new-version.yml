@@ -17,9 +17,6 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           TAGS=$(gh api repos/symfony-cli/symfony-cli/tags)
-          echo "TAGS<<EOF" >> $GITHUB_ENV
-          echo "$TAGS" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
 
       - name: Get latest tag
         id: getLatestTag
@@ -34,7 +31,7 @@ jobs:
           cmd: yq '.version' snap/snapcraft.yml
 
       - name: Update version
-        if: ${{ steps.getCurrentTag.outputs.result }} !== ${{ steps.getLatestTag.outputs.result }}
+        if: ${{ steps.getCurrentTag.outputs.result !== steps.getLatestTag.outputs.result }}
         uses: mikefarah/yq@master
         with:
           cmd: yq -i '.version = ${{ steps.getLatestTag.outputs.result }}' snap/snapcraft.yml
