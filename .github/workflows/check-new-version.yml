@@ -11,6 +11,9 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Get latest tag
         id: getLatestTag
         env:
@@ -19,9 +22,6 @@ jobs:
           sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
           sudo chmod +x /usr/bin/yq
           gh api repos/symfony-cli/symfony-cli/tags | yq '.[0].name' | grep -o '[0-9].*' | xargs -I % sh -c 'echo {tag}={%}' > $GITHUB_OUTPUT
-
-      - name: Checkout repository
-        uses: actions/checkout@v3
 
       - name: Get current tag
         id: getCurrentTag
