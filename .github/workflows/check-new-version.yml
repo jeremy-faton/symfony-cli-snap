@@ -11,8 +11,8 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: List all tags
-        id: listAllTags
+      - name: Get latest tag
+        id: getLatestTag
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
@@ -25,7 +25,7 @@ jobs:
         run: |
           sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
           sudo chmod +x /usr/bin/yq
-          yq '.version' snap/snapcraft.yml
+          ls -al
 
       - name: Update version
         if: ${{ steps.getCurrentTag.outputs.result != steps.getLatestTag.outputs.result }}
