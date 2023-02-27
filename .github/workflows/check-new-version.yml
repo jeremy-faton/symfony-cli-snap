@@ -16,7 +16,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          TAGS=$(cat << gh api repos/symfony-cli/symfony-cli/tags)
+          TAGS=$(gh api repos/symfony-cli/symfony-cli/tags)
           echo "TAGS<<EOF" >> $GITHUB_ENV
           echo "$TAGS" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
@@ -25,7 +25,7 @@ jobs:
         id: getLatestTag
         uses: mikefarah/yq@master
         with:
-          cmd: echo ${{ steps.listAllTags.outputs }} | yq '.[0].name' | grep -o '[0-9].*'
+          cmd: echo ${{ env.TAGS }} | yq '.[0].name' | grep -o '[0-9].*'
 
       - name: Get current tag
         id: getCurrentTag
