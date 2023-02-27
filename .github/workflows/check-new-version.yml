@@ -11,11 +11,16 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      - name: List all tags
+        id: listAllTags
+        run: |
+          gh api repos/symfony-cli/symfony-cli/tags > $GITHUB_OUTPUT
+
       - name: Get latest tag
         id: getLatestTag
         uses: mikefarah/yq@master
         with:
-          cmd: gh api repos/symfony-cli/symfony-cli/tags | yq '.[0].name' | grep -o '[0-9].*'
+          cmd: echo ${{ steps.listAllTags.outputs }} | yq '.[0].name' | grep -o '[0-9].*'
 
       - name: Get current tag
         id: getCurrentTag
