@@ -21,19 +21,19 @@ jobs:
         run: |
           sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
           sudo chmod +x /usr/bin/yq
-          gh api repos/symfony-cli/symfony-cli/tags | yq '.[0].name' | grep -o '[0-9].*' | xargs -I % sh -c 'echo {tag}={%}' > $GITHUB_OUTPUT
+          gh api repos/symfony-cli/symfony-cli/tags | yq '.[0].name' | grep -o '[0-9].*' | xargs -I % sh -c 'echo tag=%' > $GITHUB_OUTPUT
 
       - name: Get current tag
         id: getCurrentTag
         run: |
           sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
           sudo chmod +x /usr/bin/yq
-          yq '.version' snap/snapcraft.yaml | xargs -I % sh -c 'echo {tag}={%}' > $GITHUB_OUTPUT
+          yq '.version' snap/snapcraft.yaml | xargs -I % sh -c 'echo tag=%' > $GITHUB_OUTPUT
 
       - name: Update version
         # if: ${{ steps.getCurrentTag.outputs.tag != steps.getLatestTag.outputs.tag }}
         run: |
-          echo ${{ steps.getCurrentTag.outputs }}
+          echo ${{ steps.getCurrentTag.outputs.tag }}
         # sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
         # sudo chmod +x /usr/bin/yq
         # yq -i '.version = ${{ steps.getLatestTag.outputs.tag }}' snap/snapcraft.yaml
