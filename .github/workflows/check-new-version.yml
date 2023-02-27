@@ -17,7 +17,9 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           TAGS=$(gh api repos/symfony-cli/symfony-cli/tags)
+          echo "TAGS<<EOF" >> $GITHUB_ENV
           echo "$TAGS" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
       - name: Get latest tag
         id: getLatestTag
