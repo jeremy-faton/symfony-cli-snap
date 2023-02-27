@@ -31,7 +31,7 @@ jobs:
           cmd: yq '.version' snap/snapcraft.yml
 
       - name: Update version
-        if: ${{ steps.getCurrentTag.outputs.result !== steps.getLatestTag.outputs.result }}
+        if: ${{ steps.getCurrentTag.outputs.result != steps.getLatestTag.outputs.result }}
         uses: mikefarah/yq@master
         with:
           cmd: yq -i '.version = ${{ steps.getLatestTag.outputs.result }}' snap/snapcraft.yml
