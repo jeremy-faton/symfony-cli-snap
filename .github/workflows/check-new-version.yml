@@ -21,7 +21,7 @@ jobs:
           gh api repos/symfony-cli/symfony-cli/tags | yq '.[0].name' | grep -o '[0-9].*' | xargs -I % sh -c 'echo {tag}={%}' > $GITHUB_OUTPUT
 
       - name: Checkout repository
-        uses: action/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Get current tag
         id: getCurrentTag
