@@ -28,6 +28,7 @@ jobs:
         run: |
           sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
           sudo chmod +x /usr/bin/yq
+          ls -la
           yq '.version' snap/snapcraft.yml | xargs -I % sh -c 'echo {tag}={%}' > $GITHUB_OUTPUT
 
       - name: Update version
