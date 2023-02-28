@@ -4,8 +4,8 @@ version: "5.5.1"
 summary: The Symfony CLI tool
 description: |
   The Symfony binary to develop Symfony applications.
-grade: devel
-confinement: strict
+grade: stable
+confinement: classic
 contact: contact@jeremyfaton.me
 website: https://www.jeremyfaton.me
 
