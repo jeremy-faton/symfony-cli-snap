@@ -3,7 +3,7 @@ base: core20
 version: "5.5.1"
 summary: The Symfony CLI tool
 description: |
-  The Symfony binary to develop Symfony applications.
+  Unofficial snap package of the Symfony binary to develop Symfony applications.
 
   https://github.com/jeremy-faton/symfony-cli-snap
 grade: stable
