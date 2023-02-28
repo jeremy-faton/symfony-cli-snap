@@ -23,7 +23,7 @@ parts:
     source: https://github.com/symfony-cli/symfony-cli
     build-environment:
       - VERSION: "5.5.1"
-      - CHANNEL: dev
+      - CHANNEL: stable
     override-build: |
       go mod download
       go install -ldflags="-X main.version=$VERSION -X main.channel=$CHANNEL -linkmode=external" ./...
