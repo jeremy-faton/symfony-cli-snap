@@ -5,7 +5,7 @@ summary: The Symfony CLI tool
 description: |
   The Symfony binary to develop Symfony applications.
 grade: stable
-confinement: classic
+confinement: devmode
 contact: contact@jeremyfaton.me
 website: https://www.jeremyfaton.me
 
