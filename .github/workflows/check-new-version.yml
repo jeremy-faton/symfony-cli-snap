@@ -36,7 +36,7 @@ jobs:
           sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
           sudo chmod +x /usr/bin/yq
           yq -i '.version = "${{ steps.getLatestTag.outputs.tag }}"' snap/snapcraft.yaml
-          yq -i '.parts.symfony.build-environment[VERSION] = "${{ steps.getLatestTag.outputs.tag }}"' snap/snapcraft.yaml
+          yq -i '.parts.symfony.build-environment[0].VERSION = "${{ steps.getLatestTag.outputs.tag }}"' snap/snapcraft.yaml
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4

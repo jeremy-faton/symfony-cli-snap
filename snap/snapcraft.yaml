@@ -10,12 +10,10 @@ grade: stable
 confinement: strict
 contact: contact@jeremyfaton.me
 website: https://www.jeremyfaton.me
-
 architectures:
   - build-on: arm64
   - build-on: armhf
   - build-on: amd64
-
 parts:
   symfony:
     plugin: go
@@ -27,7 +25,6 @@ parts:
     override-build: |
       go mod download
       go install -ldflags="-X main.version=$VERSION -X main.channel=$CHANNEL -linkmode=external" ./...
-
 apps:
   symfony:
     command: bin/symfony-cli
