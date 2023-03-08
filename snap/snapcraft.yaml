@@ -1,6 +1,6 @@
 name: symfony
 base: core20
-version: "5.5.1"
+version: "5.5.0"
 summary: The Symfony CLI tool
 description: |
   Unofficial snap package of the Symfony binary to develop Symfony applications.
@@ -22,7 +22,7 @@ parts:
     source-type: git
     source: https://github.com/symfony-cli/symfony-cli
     build-environment:
-      - VERSION: "5.5.1"
+      - VERSION: "5.5.0"
       - CHANNEL: stable
     override-build: |
       go mod download
