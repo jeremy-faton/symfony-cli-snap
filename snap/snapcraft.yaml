@@ -1,6 +1,6 @@
 name: symfony
 base: core20
-version: "5.5.1"
+version: "5.5.2"
 summary: The Symfony CLI tool
 description: |
   Unofficial snap package of the Symfony binary to develop Symfony applications.
@@ -10,24 +10,21 @@ grade: stable
 confinement: strict
 contact: contact@jeremyfaton.me
 website: https://www.jeremyfaton.me
-
 architectures:
   - build-on: arm64
   - build-on: armhf
   - build-on: amd64
-
 parts:
   symfony:
     plugin: go
     source-type: git
     source: https://github.com/symfony-cli/symfony-cli
     build-environment:
-      - VERSION: "5.5.1"
+      - VERSION: "5.5.2"
       - CHANNEL: stable
     override-build: |
       go mod download
       go install -ldflags="-X main.version=$VERSION -X main.channel=$CHANNEL -linkmode=external" ./...
-
 apps:
   symfony:
     command: bin/symfony-cli
